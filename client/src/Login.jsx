@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { navigate, Redirect, Link } from '@reach/router';
-import styled from 'styled-components';
+import { Redirect, Link } from '@reach/router';
+// import styled from 'styled-components';
 
-const StyledDiv = styled.div``;
+// const StyledDiv = styled.div``;
 
 const Login = ({ auth }) => {
   const [credentials, setCredentials] = useState({});
@@ -17,7 +17,7 @@ const Login = ({ auth }) => {
     await auth.login(credentials.username, credentials.password);
   };
 
-  if (auth.user) return <Redirect to="/" noThrow />;
+  if (auth.user) return <Redirect to="/jokes" noThrow />;
 
   return (
     <div>
