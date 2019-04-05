@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Redirect, Link, navigate } from '@reach/router';
+import useForm from '../hooks/useForm';
+
 // import styled from 'styled-components';
 
 // const StyledDiv = styled.div``;
 
 const Login = ({ auth }) => {
-  const [credentials, setCredentials] = useState({});
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setCredentials(values => ({ ...values, [name]: value }));
-  };
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    await auth.login(credentials.username, credentials.password);
+  const login = async e => {
+    await auth.login(values.username, values.password);
     navigate('/jokes');
   };
+
+  const { values, handleChange, handleSubmit } = useForm(login);
 
   if (auth.user) return <Redirect to="/jokes" noThrow />;
 
@@ -30,7 +26,7 @@ const Login = ({ auth }) => {
         <input
           name="username"
           type="text"
-          value={credentials.username || ''}
+          value={values.username || ''}
           onChange={handleChange}
           placeholder="Username"
           autoFocus
@@ -38,7 +34,7 @@ const Login = ({ auth }) => {
         <input
           type="password"
           name="password"
-          value={credentials.password || ''}
+          value={values.password || ''}
           onChange={handleChange}
           placeholder="Password"
         />
