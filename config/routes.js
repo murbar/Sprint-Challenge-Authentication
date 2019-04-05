@@ -1,6 +1,10 @@
 const axios = require('axios');
+const bcrypt = require('bcryptjs');
+const db = require('../database/dbConfig');
 
-const { authenticate } = require('../auth/authenticate');
+const { authenticate, generateToken } = require('../auth/authenticate');
+
+const USERS_TABLE = 'users';
 
 module.exports = server => {
   server.post('/api/register', register);
@@ -8,8 +12,27 @@ module.exports = server => {
   server.get('/api/jokes', authenticate, getJokes);
 };
 
-function register(req, res) {
-  // implement user registration
+async function register(req, res) {
+  try {
+    let user = req.body;
+    if (!user.username || !user.password) {
+      res.status(400).json({ error: 'Username and password are required.' });
+    } else {
+      const hash = await bcrypt.hash(user.password, 12);
+      user.password = hash;
+      const [newUserId] = await db(USERS_TABLE).insert(user);
+      const newUser = await db(USERS_TABLE)
+        .where({ id: newUserId })
+        .first();
+      const token = generateToken(newUser);
+      res.status(201).json({
+        message: `User registered. Welcome ${newUser.username}.`,
+        token
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Cannot register new user.' });
+  }
 }
 
 function login(req, res) {
