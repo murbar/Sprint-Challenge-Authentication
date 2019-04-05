@@ -3,9 +3,15 @@ import { Link } from '@reach/router';
 import styled from 'styled-components';
 
 const StyledNav = styled.nav`
+  position: relative;
   padding: 1rem 0;
   a {
     margin-right: 1rem;
+  }
+  a:last-child {
+    position: absolute;
+    right: 0;
+    margin-right: 0;
   }
 `;
 
