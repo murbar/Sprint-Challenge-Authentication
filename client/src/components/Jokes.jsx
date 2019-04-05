@@ -4,8 +4,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-  h2 span {
-    text-transform: capitalize;
+  li {
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -30,12 +30,14 @@ const Jokes = ({ auth }) => {
   return (
     <StyledDiv>
       <h2>
-        Some jokes for you, <span>{auth.user.username}</span>
+        Some jokes for you, <span className="username">{auth.user.username}</span>
       </h2>
 
-      {jokes.map(j => (
-        <p key={j.id}>{j.joke}</p>
-      ))}
+      <ol>
+        {jokes.map(j => (
+          <li key={j.id}>{j.joke}</li>
+        ))}
+      </ol>
     </StyledDiv>
   );
 };
