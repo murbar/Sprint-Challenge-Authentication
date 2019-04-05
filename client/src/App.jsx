@@ -17,6 +17,26 @@ const StyledDiv = styled.div`
   .username {
     text-transform: capitalize;
   }
+  a {
+    color: orangered;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  input,
+  button {
+    font-size: 1.1rem;
+    padding: 0.25rem 0.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    border: 1px solid orangered;
+    border-radius: 0.25rem;
+  }
+  button {
+    background: orangered;
+    color: white;
+  }
 `;
 
 const App = () => {
