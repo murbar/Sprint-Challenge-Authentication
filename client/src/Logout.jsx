@@ -1,10 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Redirect } from '@reach/router';
 
-const StyledDiv = styled.div``;
-
-const Logout = () => {
-  return <StyledDiv>Logout</StyledDiv>;
+const Logout = ({ auth }) => {
+  auth.logout();
+  return <Redirect to="/" noThrow />;
 };
 
 export default Logout;
