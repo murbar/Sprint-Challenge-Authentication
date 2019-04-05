@@ -3,7 +3,11 @@ import { Redirect } from '@reach/router';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div``;
+const StyledDiv = styled.div`
+  h2 span {
+    text-transform: capitalize;
+  }
+`;
 
 const Jokes = ({ auth }) => {
   if (!auth.user) return <Redirect to="/login" noThrow />;
@@ -25,7 +29,10 @@ const Jokes = ({ auth }) => {
 
   return (
     <StyledDiv>
-      <h2>Some jokes for you, {auth.user.username}</h2>
+      <h2>
+        Some jokes for you, <span>{auth.user.username}</span>
+      </h2>
+
       {jokes.map(j => (
         <p key={j.id}>{j.joke}</p>
       ))}
