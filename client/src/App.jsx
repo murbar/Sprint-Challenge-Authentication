@@ -28,7 +28,7 @@ const App = () => {
         <Register path="/register" auth={auth} />
         <Logout path="/logout" auth={auth} />
         <Jokes path="/jokes" auth={auth} />
-        <Home path="/" />
+        <Home path="/" auth={auth} />
         <NotFound default />
       </Router>
     </StyledDiv>
