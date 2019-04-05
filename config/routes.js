@@ -35,8 +35,25 @@ async function register(req, res) {
   }
 }
 
-function login(req, res) {
-  // implement user login
+async function login(req, res) {
+  try {
+    const { username, password } = req.body;
+    const user = username
+      ? await db(USERS_TABLE)
+          .where({ username })
+          .first()
+      : null;
+    const credentialsValid =
+      user && password ? await bcrypt.compare(password, user.password) : false;
+    if (!user || !credentialsValid) {
+      res.status(401).json({ error: 'Invalid Credentials.' });
+    } else {
+      const token = generateToken(user);
+      res.status(200).json({ message: `Welcome, ${user.username}.`, token });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Cannot complete login.' });
+  }
 }
 
 function getJokes(req, res) {
