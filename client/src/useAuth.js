@@ -9,7 +9,6 @@ const useAuth = endPoint => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    console.log(token, user);
     if (token) {
       localStorage.setItem(TOKEN_KEY, token);
       axios.defaults.headers.common['Authorization'] = token;
