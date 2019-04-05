@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Router } from '@reach/router';
-import useAuth from './useAuth';
-import Home from './Home';
-import Nav from './Nav';
-import Jokes from './Jokes';
-import Register from './Register';
-import Login from './Login';
-import Logout from './Logout';
-import NotFound from './NotFound';
+import useAuth from './hooks/useAuth';
+import Home from './components/Home';
+import Nav from './components/Nav';
+import Jokes from './components/Jokes';
+import Register from './components/Register';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import NotFound from './components/NotFound';
 
 const StyledDiv = styled.div`
   max-width: 35rem;
