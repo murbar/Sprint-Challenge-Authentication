@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, Link } from '@reach/router';
+import { Redirect, Link, navigate } from '@reach/router';
 // import styled from 'styled-components';
 
 // const StyledDiv = styled.div``;
@@ -15,6 +15,7 @@ const Login = ({ auth }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     await auth.login(credentials.username, credentials.password);
+    navigate('/jokes');
   };
 
   if (auth.user) return <Redirect to="/jokes" noThrow />;
