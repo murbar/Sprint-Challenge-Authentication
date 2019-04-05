@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Router } from '@reach/router';
+import useAuth from './useAuth';
 import Jokes from './Jokes';
 import Register from './Register';
 import Login from './Login';
@@ -14,20 +15,16 @@ const StyledDiv = styled.div`
 `;
 
 const App = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // get user from LS
-  }, []);
+  const auth = useAuth('http://localhost:3300/api');
 
   return (
     <StyledDiv>
       <h1>Dad Jokes!</h1>
       <Router>
-        <Login path="/login" />
-        <Register path="/register" />
-        <Logout path="/logout" />
-        <Jokes path="/" />
+        <Login path="/login" auth={auth} />
+        <Register path="/register" auth={auth} />
+        <Logout path="/logout" auth={auth} />
+        <Jokes path="/" auth={auth} />
         <NotFound default />
       </Router>
     </StyledDiv>
