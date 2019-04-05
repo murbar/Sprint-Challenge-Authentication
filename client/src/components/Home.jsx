@@ -9,7 +9,9 @@ const Home = ({ auth }) => {
   if (auth.user)
     return (
       <StyledDiv>
-        <h2>Hello, {auth.user.username}!</h2>
+        <h2>
+          Hello, <span className="username">{auth.user.username}</span>!
+        </h2>
         <p>
           <Link to="/jokes">Click here</Link> for some awesome dad jokes.
         </p>

@@ -14,6 +14,9 @@ const StyledDiv = styled.div`
   max-width: 35rem;
   margin: 1rem auto 3rem;
   padding: 0 1rem;
+  .username {
+    text-transform: capitalize;
+  }
 `;
 
 const App = () => {
